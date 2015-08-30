@@ -96,7 +96,7 @@
 }
 
 .sheet-useSpells:checked + .sheet-spells { /*if the input field attr_showSpells is checked, show the table*/
-	display: inline-block;
+    display: inline-block;
 }
 
 .sheet-cac { /*Hide the table of spells*/
@@ -255,4 +255,3 @@
 .sheet-useInvoc:checked + .sheet-invoc { /*if the input field attr_showSpells is checked, show the table*/
     display: inline-block;
 }
-
