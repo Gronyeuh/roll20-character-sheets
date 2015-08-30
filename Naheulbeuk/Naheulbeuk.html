@@ -46,9 +46,10 @@
          <tr>
             <td class="bluehilite boldme alleft">Monnaie :</td>
             <br>
-            <td><input type="number" name="attr_PO" class="medium" value="0"/> Or <br>
-            <input type="number" name="attr_PA" class="medium" value="0"/> Argent</td>
-            
+            <td><input type="number" name="attr_PO" class="medium" value="0"/>Or / <input type="number" name="attr_POMax" class="medium" value="0"/>Bourse totale<br>
+            <input type="number" name="attr_PA" class="medium" value="0"/>Argent<br>
+            <input type="number" name="attr_Be" class="medium" value="0"/>Berylium=500PO (500 grammes)<br>
+            <input type="number" name="attr_Th" class="medium" value="0"/>Thritil=100PO (300 grammes)</td>
          </tr>
         </table>
     </div> 
@@ -99,7 +100,7 @@
         <tr>
             <td class="boldme">Resistance Magique</td>
             <td>Moy. COU/INT/FO</td>
-            <td><input type="number" name="attr_ResiMagie" value="ceil((@{Courage}+@{Intelligence}+@{Force})/3)" disabled="true"> </td>
+            <td><input type="number" name="attr_ResiMagie" value="ceil((@{Courage}+@{CourageMod}+@{Intelligence}+@{IntelligenceMod}+@{Force}+@{ForceMod})/3)" disabled="true"> </td>
             <td><input type="number" name="attr_ResiMagieMod" value="0"> </td>
             <td><button type="roll" value="/roll d20<[[@{ResiMagie}+@{ResiMagieMod}]] (Resitance à la Magie)"/></td>
         </tr>
@@ -120,16 +121,29 @@
         <tr>
             <td class="boldme">Magie Physique</td>
             <td>Moy. INT/AD</td>
-            <td><input type="number" name="attr_MagiePhy" value="ceil((@{Intelligence}+@{Adresse})/2)" disabled="true"/> </td>
+            <td><input type="number" name="attr_MagiePhy" value="ceil((@{Intelligence}+@{IntelligenceMod}+@{Adresse}+@{AdresseMod})/2)" disabled="true"/> </td>
             <td><input type="number" name="attr_MagiePhyMod" value="0"> </td>
             <td><button type="roll" value="/roll d20<[[@{MagiePhy}+@{MagiePhyMod}]] (Epreuve de Magie Physique)"/></td>
         </tr>
         <tr>
             <td class="boldme">Magie Psychique</td>
             <td>Moy. INT/CHA</td>
-            <td><input type="number" name="attr_MagiePsy" value="ceil((@{Intelligence}+@{Charisme})/2)" disabled="true"> </td>
+            <td><input type="number" name="attr_MagiePsy" value="ceil((@{Intelligence}+@{IntelligenceMod}+@{Charisme}+@{CharismeMod})/2)" disabled="true"> </td>
             <td><input type="number" name="attr_MagiePsyMod" value="0"> </td>
             <td><button type="roll" value="/roll d20<[[@{MagiePsy}+@{MagiePsyMod}]] (Epreuve de Magie Psychique)"/></td>
+        </tr>
+        <tr>
+            <td class="boldme">Vitesse</td>
+            <td>mètres/assaut</td>
+            <td><input type="number" name="attr_Vitesse" value="0"> </td>
+            </td>
+        </tr>
+        <tr>
+            <td class="boldme">Esquive</td>
+            <td>bonus/malus</td>
+            <td><input type="number" name="attr_Esquive" value="0"> </td>
+            <td></td>
+            <td><button type="roll" value="/roll d20<[[@{Adresse}+@{AdresseMod}+@{Esquive}]] (Jet d'esquive)"/></td>
         </tr>
         </table>
     </div>
@@ -228,8 +242,8 @@
     <div class="sheet-col" style="width: 70px; text-align: center;">? x D6</div>
     <div class="sheet-col" style="width: 70px; text-align: center;">+ ?</div>
     <fieldset class="repeating_cac">
-		<div class="sheet-row">
-			<div class="sheet-col" style="width: 100px; text-align: center;">
+        <div class="sheet-row">
+        	<div class="sheet-col" style="width: 100px; text-align: center;">
 				<button type="roll" value="/roll {1d20}<[[@{ValAttaque}+@{ValAttaqueMod}+@{ArmeAT}]] Attaque avec @{ArmeNom}" name="roll_ArmeAttaque" /> Attaque
             </div>
             <div class="sheet-col" style="width: 100px; text-align: center;">
@@ -324,7 +338,7 @@
     <div class="sheet-col" style="width: 70px; text-align: center;">Contrôle <br>(? x D6)</div>
 	<div class="sheet-col" style="width: 70px; text-align: center;">Révocation<br>(? x D6)</div>
 	<div class="sheet-col" style="width: 70px; text-align: center;">Cout</div>
-	<fieldset class="repeating_spells">
+	<fieldset class="repeating_invoc">
 		<div class="sheet-row">
 			<div class="sheet-col" style="width: 325px; text-align: center;">
                 <button type="roll" value="/roll {1d20}<[[@{MagiePsy}+@{InvocBonus_1}]] Invoque @{CreatureNom_1}" name="roll_Invoquer_1" /> Invoquer
@@ -455,7 +469,23 @@
 
 <br>
 <br>
-
+<h4 style="text-align:center;">Notes</h4>
+<input class="sheet-useNotes" type="checkbox" name="attr_showNotes">
+    <div class="notes">
+        <table width="100%">
+            <input type="text" name="attr_Notes01" class="long" />
+            <input type="text" name="attr_Notes02" class="long" />
+            <input type="text" name="attr_Notes03" class="long" />
+            <input type="text" name="attr_Notes04" class="long" />
+                <fieldset class="repeating_Notes">
+                    <input type="text" name="attr_Notes" class="long" />
+                </fieldset>
+        </table>
+    </div>
+</div>
+<hr>
+<br>
+<br>
 <h4 style="text-align:center;">Résumé des Compétences</h4>
 <br>
 <br>
